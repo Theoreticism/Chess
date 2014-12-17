@@ -3,13 +3,14 @@ class Minimax:
 
 	def minimax(state, alpha, beta):
 		if state.gameOver():
-			return state.evaluate()
+			return State.evaluate()
 		else: 
-			if state.toMove() == "white":
+			if State.toMove() == "white":
 				bestMove = None
-				for move in state.allLegalMoves():
-					newState = state.makeMove(move)
-					score, move = minimax(newState, alpha, beta)
+				for move in State.allLegalMoves():
+					newState = State.makeMove(move)
+					move = minimax(newState, alpha, beta)
+					score = 0; #determine score?
 					if score > alpha: 
 						alpha = score
 						bestMove = move
@@ -18,9 +19,10 @@ class Minimax:
 				return bestMove
 			else:
 				bestMove = None
-				for move in state.allLegalMoves():
-					newState = state.makeMove(move)
-					score, move = minimax(newState, alpha, beta)
+				for move in State.allLegalMoves():
+					newState = State.makeMove(move)
+					move = minimax(newState, alpha, beta)
+					score = 0; #determine score?
 					if score < beta
 						beta = score
 						bestMove = move
