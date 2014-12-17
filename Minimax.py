@@ -1,31 +1,29 @@
 class Minimax:
 	'Minimax implementation for chess moves'
 
-	def minimax(state, alpha, beta):
-		if state.gameOver():
-			return State.evaluate()
+	def minimax(state, depth, alpha, beta):
+		if depth == 0 or state.gameOver():
+			return [State.evaluate(), None]
 		else: 
 			if State.toMove() == "white":
 				bestMove = None
 				for move in State.allLegalMoves():
 					newState = State.makeMove(move)
-					move = minimax(newState, alpha, beta)
-					score = 0; #determine score?
+					score, move = minimax(newState, depth - 1, alpha, beta)
 					if score > alpha: 
 						alpha = score
 						bestMove = move
 						if alpha >= beta:
 							break
-				return bestMove
+				return [alpha, bestMove]
 			else:
 				bestMove = None
 				for move in State.allLegalMoves():
 					newState = State.makeMove(move)
-					move = minimax(newState, alpha, beta)
-					score = 0; #determine score?
+					score, move = minimax(newState, alpha, beta)
 					if score < beta
 						beta = score
 						bestMove = move
 						if alpha >= beta:
 							break
-				return bestMove
+				return [beta, bestMove]
